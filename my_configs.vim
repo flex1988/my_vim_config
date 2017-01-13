@@ -10,17 +10,18 @@ Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 Plugin 'maksimr/vim-jsbeautify'
+Plugin 'einars/js-beautify'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-markdown'
 Plugin 'Chiel92/vim-autoformat'
-Plugin 'fatih/vim-go'
 Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'rhysd/vim-clang-format'
+Plugin 'Valloric/YouCompleteMe'
 call vundle#end()
-autocmd vimenter * NERDTree
+"autocmd vimenter * NERDTree
 syntax enable
 set background=dark
 let g:NERDTreeWinPos = "left"
@@ -28,7 +29,6 @@ let g:NERDTreeWinPos = "left"
 map <F2> :NERDTreeToggle<CR>
 syntax on
 
-syntax enable
 let g:solarized_termcolors=256
 colorscheme solarized
 
@@ -45,7 +45,14 @@ let g:clang_format#style_options = {
             \ "AllowShortIfStatementsOnASingleLine" : "true",
             \ "AlwaysBreakTemplateDeclarations" : "true",
             \ "Standard" : "C++11",
+            \ "PointerAlignment" : "Right",
+            \ "ColumnLimit": 140,
             \ "BasedOnStyle": "Mozilla"}
+
+"let g:clang_format#style_options = {
+    "\ "BasedOnStyle":"Google",
+    "\ "IndentWidth":4,
+    "\ "AllowShortIfStatementsOnASingleLine": "false"}
 
 "map to <Leader>cf in C++ code
 autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
@@ -54,7 +61,7 @@ autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
 autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
 " Toggle auto formatting:
 nmap <Leader>C :ClangFormatAutoToggle<CR>
-
+nmap <leader>n :NERDTree<CR>
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 function! s:CloseIfOnlyControlWinLeft()
   if winnr("$") != 1
@@ -69,6 +76,10 @@ augroup CloseIfOnlyControlWinLeft
   au!
   au BufEnter * call s:CloseIfOnlyControlWinLeft()
 augroup END
+
+"set foldmethod=indent
+set foldmethod=syntax
+set nofoldenable
 
 noremap <leader>1 1gt
 noremap <leader>2 2gt
