@@ -19,7 +19,6 @@ Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'rhysd/vim-clang-format'
-Plugin 'Valloric/YouCompleteMe'
 call vundle#end()
 "autocmd vimenter * NERDTree
 syntax enable
@@ -29,7 +28,6 @@ let g:NERDTreeWinPos = "left"
 map <F2> :NERDTreeToggle<CR>
 syntax on
 
-let g:solarized_termcolors=256
 colorscheme solarized
 
 
